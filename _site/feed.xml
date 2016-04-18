@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bruno Medina&#39;s Blog</title>
+    <description>Bruno Medina works as a Senior Technical Evangelist for Microsoft. Bruno Medina is also the creator of Geek Pride, a popular Channel 9 Video Blog.  Here you will find posts about: technology, software  development, web, Open Source, Azure and some other random cool stuff.
+</description>
+    <link>http://brunomedina.mx</link>
+    <atom:link href="http://brunomedina.mx/feed.xml" rel="self" type="application/rss+xml" />
+    
+      <item>
+        <title>Set up Jekyll from you your Docker VM in Azure</title>
+        <description>
+          
+          First of all make sure you followed my previous post on how to create a VM for Docker on Azure. Jekyll is really simple to use, and what its even better is that there are plenty of themes that can be used right out of the box. I suggest you...
+        </description>
+        <pubDate>Mon, 18 Apr 2016 00:00:00 -0500</pubDate>
+        <link>http://brunomedina.mx/2016-04-18-jekyll-docker/</link>
+        <guid isPermaLink="true">http://brunomedina.mx/2016-04-18-jekyll-docker/</guid>
+      </item>
+    
+      <item>
+        <title>Set up your Docker VM from the Azure Market Place</title>
+        <description>
+          
+          First things first, I will be using Visual Studio Code to edit my files, you can download it here. After you install it, make sure you can run it from terminal, here is how to accomplish that (if you are using Zsh use this post instead). To start with the...
+        </description>
+        <pubDate>Mon, 18 Apr 2016 00:00:00 -0500</pubDate>
+        <link>http://brunomedina.mx/2016-04-18-docker-azure/</link>
+        <guid isPermaLink="true">http://brunomedina.mx/2016-04-18-docker-azure/</guid>
+      </item>
+    
+  </channel>
+</rss>

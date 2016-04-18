@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Set up your Docker VM from the Azure Market Place</title>
+
+  <meta name="author" content="Bruno Medina Bolaños Cacho" />
+  
+  
+
+  <link rel="alternate" type="application/rss+xml" title="Bruno Medina's Blog - Bruno Medina works as a Senior Technical Evangelist for Microsoft. Bruno Medina is also the creator of Geek Pride, a popular Channel 9 Video Blog.  Here you will find posts about: technology, software  development, web, Open Source, Azure and some other random cool stuff.
+" href="/feed.xml" />
+  
+ <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+    
+  
+    
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+    
+      
+  
+  
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+    
+  
+  
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+    
+    
+  
+  
+  
+  
+  
+     
+  
+  <!-- Facebook OpenGraph tags -->
+  <meta property="og:title" content="Set up your Docker VM from the Azure Market Place" />
+  <meta property="og:type" content="website" />
+  
+  
+  <meta property="og:url" content="http://brunomedina.mx/2016-04-18-docker-azure//" />
+  
+  
+  
+  <meta property="og:image" content="http://brunomedina.mx/img/avatar-icon.png" />
+  
+  
+</head>
+
+
+  <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="http://brunomedina.mx">Bruno Medina's Blog</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+	    
+	      
+	      
+        <li>
+          
+          
+
+        
+
+	      <a href="/">Home</a>
+	      </li>
+	    
+	      
+	      
+        <li>
+          
+          
+
+        
+
+	      <a href="/aboutme">Bruno's CV</a>
+	      </li>
+	    
+      </ul>
+    </div>
+
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://brunomedina.mx ">
+	      <img class="avatar-img" src="/img/avatar-icon.png" />
+		</a>
+	  </div>
+	</div>
+	
+
+  </div>
+</nav>
+
+
+    <div role="main" class="container main-content">
+      <header class="header-post">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="post-heading">
+        <h1>Set up your Docker VM from the Azure Market Place</h1>
+        
+        <span class="post-meta">Posted on April 18, 2016</span>
+      </div>
+     </div>
+  </div>
+</header>
+
+<article>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+	  <ol>
+  <li>First things first, I will be using Visual Studio Code to edit my files, you can download it <a href="https://code.visualstudio.com/Download">here</a>. After you install it, make sure you can run it from terminal, <a href="https://code.visualstudio.com/docs/editor/setup">here</a> is how to accomplish that (if you are using Zsh use this <a href="http://kevgriffin.com/how-to-run-visual-studio-code-from-zsh-on-mac-osx/">post</a> instead).
+  <img src="../img/vscode.jpg" alt="alt text" title="Visual Studio Code works like a charm" /></li>
+  <li>
+    <p>To start with the action, log in to your <a href="http://portal.azure.com">Azure account</a>.</p>
+  </li>
+  <li>Go to this <a href="https://azure.microsoft.com/en-us/marketplace/partners/canonicalandmsopentech/dockeronubuntuserver1404lts/">link</a>. This is the Azure Marketplace, where you can find multiple types of VMs ready to be deployed.
+ <img src="../img/docker-in-marketplace.jpg" alt="alt text" title="Azure Marketplace." /></li>
+  <li>
+    <p>Click on the <em>‘Create Virtual Machine &gt;’</em> button and this will redirect you to your Azure Account. For this case we have an Ubuntu Server provisioned with Docker.
+ <img src="../img/docker-vm-in-azure.jpg" alt="alt text" title="Docker VM in Azure ready to be deployed." /></p>
+  </li>
+  <li>
+    <p>Press the ‘Create’ button and fill up the form. Remember “Host Name” is how you are gonna refer to your VM. “User name” is the name you will use to access to your VM. Also, I would suggest that you always use “SSH public key” as your authentication type.</p>
+  </li>
+  <li><strong>(Optional) Create an SSH key.</strong> 
+The only thing you need to do is create the RSA key with the following command in your terminal (don’t forget to put your mail address instead of the placeholder).</li>
+</ol>
+
+<pre><code class="language-Shell">ssh-keygen -t rsa -b 4096 -C "mymail@brus.ml"
+</code></pre>
+<p>2.- After this command you will be asked for a location to save your powerful key.</p>
+
+<pre><code class="language-Shell">Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+</code></pre>
+
+<ol>
+  <li>Don’t forget the passphrase you use in the next step:</li>
+</ol>
+
+<pre><code class="language-Shell">    Enter passphrase (empty for no passphrase): [Type a passphrase]
+    Enter same passphrase again: [Type passphrase again]
+</code></pre>
+<ol>
+  <li>Now, after your key has been created just <em>cat</em> the content of your public key (if you used a different location, make sure you use the correct file).</li>
+</ol>
+
+<pre><code class="language-Shell">    code ~/.ssh/id_rsa.pub
+    [This is an example of how and your pub key should look like:]
+    ssh-rsa 123456789/dTc6wJT+YCOUiLLS6F7Ge4WlCgmH7fW7UIUJpFcXwDv1bWVMQ3chBFFELWEhEjCqX7HAVoSjEF8oAwM0Ik5p6y66J420eeOGBLHkyV+nBiV0F5WVRKFS5Az1rZy8x/1usbMms/skMnS5Int9QcGIIA9g7Ws9xg28/2XA5IUPUZ0kIKbuSv7bAIqrHaH7WXzUeLeOjUIeW34d9WO52kNqiITjyW1D7kThXKtgS9Y5TEie5MuP8plzz+mBID59EFmdEhBK7QquuT6axI1PIDNm4PrhI7mJP9IgRRQOOXZ1rvoysOHxhDvzVWRuc623pV8PPjiBHiu1Y1T mymail@brus.ml
+</code></pre>
+<p>Copy all the content from the file and paste it to you VM’s definition in the Azure Portal.
+    <img src="../img/set-vm-up.jpg" alt="alt text" title="Fill it up with your info." /></p>
+
+<p><strong>*Note:</strong> If you are using a Windows computer I higly suggest using “git shell” to create the key, you can download it <a href="https://desktop.github.com/">here</a>. Also you can use PuTTY.</p>
+
+<ol>
+  <li>Select the “pricing tier” that suits your needs. Please remeber that you can select more pricing tiers from the “View All” option.
+ <img src="../img/pricing-tiers.jpg" alt="alt text" title="Click 'View more' to see more options." /></li>
+  <li>Confirm the “Network” settings on your VM. You don’t really need to change anything here unless you want to customize something like your “Domain Name”.
+ <img src="../img/network-conf.jpg" alt="alt text" title="You can use this section to customize your VM's network." /></li>
+  <li>Select or create a new Storage Account. If you already have an Storage Account that can be used for your VM, you just need to select it from here.
+ <img src="../img/storage-conf.jpg" alt="alt text" title="You can create a new storage account or use one previously created." /></li>
+  <li>Add rules to your VM. In order for us to see the web pages served by our VM we will have to allow HTTP and HTTPS traffic, that means that we need to create an allow rule for port 80 and another one for 443.
+ <img src="../img/rules-conf.jpg" alt="alt text" title="Allow access to the VM with Endpoint Rules." /></li>
+  <li>Finally, we select the location of our VM and “Create” our VM. For this purpose, any datacenter would do. Now, my advice would be to use a region that is close to your business, also if you need it here is a <a href="https://azure.microsoft.com/en-us/regions/#services">list</a> of services available by region.
+After you click on create you can see the progress of the deployment on you notifications.
+ <img src="../img/deployment-status.jpg" alt="alt text" title="Your VM is being deployed." />
+ <img src="../img/deployment-done.jpg" alt="alt text" title="Your VM was succesfully deployed." /></li>
+  <li><strong>Let’s take it for a ride!</strong> So finally we have our brand new toy deployed, lets verify if it’s up and running.
+    <ol>
+      <li>Go to your new VM’s details. As you can see in the image the app is up and running, it has a DNS name and an IP.
+ <img src="../img/vm-details.jpg" alt="alt text" title="Your VM's details" /></li>
+      <li>SSH into your VM. As you remembered we have already set up the SSH access to our VM, so lets open a terminal and try to log in:</li>
+    </ol>
+  </li>
+</ol>
+
+<pre><code class="language-Shell">ssh myUserName@myDomainName.cloudapp.net
+</code></pre>
+
+<p>Make sure you replace “myUserName” with your VM’s user name and the url should be your “DNS name” from the VM’s details.
+Now you will have to confirm de connection:</p>
+
+<pre><code class="language-Shell">The authenticity of host 'myDomainName.cloudapp.net (14.81.161.17)' can't be established.
+ECDSA key fingerprint is SHA256:Fy9G/qkO9mlNo6aJpcBT3SL4Qz1BMWB9iTAJ6VrvjbPS.
+Are you sure you want to continue connecting (yes/no)? yes [Type 'yes' and enter]
+Warning: Permanently added 'myDomainName.cloudapp.net,14.81.161.17' (ECDSA) to the list of known hosts.
+</code></pre>
+<ol>
+  <li>
+    <p>Since we are using our public key we should be getting something like this:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>     Welcome to Ubuntu 15.10 (GNU/Linux 4.2.0-23-generic x86_64)
+     Documentation:  https://help.ubuntu.com/
+
+     Get cloud support with Ubuntu Advantage Cloud Guest:
+         http://www.ubuntu.com/business/services/cloud
+
+     83 packages can be updated.
+     61 updates are security updates.
+
+     The programs included with the Ubuntu system are free software;
+     the exact distribution terms for each program are described in the
+     individual files in /usr/share/doc/*/copyright.
+
+     Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+     applicable law.
+
+     To run a command as administrator (user "root"), use "sudo &lt;command&gt;".
+     See "man sudo_root" for details.
+
+     _____________________________________________________________________
+     WARNING! Your environment specifies an invalid locale.
+     This can affect your user experience significantly, including the
+     ability to manage packages. You may install the locales by running:
+
+     sudo apt-get install language-pack-UTF-8
+         or
+     sudo locale-gen UTF-8
+
+     To see all available language packs, run:
+     apt-cache search "^language-pack-[a-z][a-z]$"
+     To disable this message for all users, run:
+     sudo touch /var/lib/cloud/instance/locale-check.skip
+     _____________________________________________________________________
+
+     myUserName@myDomainName:~$ 
+</code></pre>
+    </div>
+  </li>
+</ol>
+
+<p><strong>SO, WE ARE IN!</strong></p>
+
+<p><em>Note: If you configured your VM to use a password instead of an SSH key you will be asked to submit it.</em></p>
+
+<p><em>Note 2: Also, in the case that you set up your SSH key with <code class="highlighter-rouge">ssh-keygen</code> but the server is asking you for a password, that means that the SSH command is not finding your key.
+In this case make sure of two things, that your key is valid and is set to your terminal with <code class="highlighter-rouge">ssh-add</code> read <a href="http://stackoverflow.com/questions/17846529/could-not-open-a-connection-to-your-authentication-agent">this</a>.
+And also, make sure that you are using the correct SSH key, you can use <code class="highlighter-rouge">ssh -v -i path/to/key</code> to make sure it’s using the correct identity and “-v” will make the command verbose so you can see the error logs.
+In the worst case scenario, remember you can reset your password and user name in the portal:</em>
+    <img src="../img/reset-password.jpg" alt="alt text" title="Don't worry if you forgot your credentials, you can always reset them" /></p>
+
+<ol>
+  <li><strong>(OPTIONAL)</strong> Also, if you want to add a higher degree of customization you can create a <code class="highlighter-rouge">config</code> file on <code class="highlighter-rouge">.ssh</code> folder.</li>
+</ol>
+
+<pre><code class="language-Shell">    echo "" &gt; ~/.ssh/config
+    code ~/.ssh/config
+</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>6. You can take the following lines as an example, just make sure to replace the relevant information and save it after you are done:
+</code></pre>
+</div>
+
+<pre><code class="language-Shell">    Host myVM
+    HostName myDomainName.cloudapp.net
+    User myUserName
+    IdentityFile ~/.ssh/id_rsa
+</code></pre>
+
+<p>*NOTE: Make sure that the identity file is the private key (not the <code class="highlighter-rouge">.pub</code> file) that you created in the <strong>“Create an SSH key”</strong> step, it should be right next to the <code class="highlighter-rouge">.pub</code> file but without an extension or with the <code class="highlighter-rouge">.key</code> extension.</p>
+
+<p>With this change done you can easily get to your server using this command:</p>
+
+<pre><code class="language-Shell">    ssh myVM
+</code></pre>
+<div class="highlighter-rouge"><pre class="highlight"><code>And you should see your server, something like this:
+
+        Welcome to Ubuntu 15.10 (GNU/Linux 4.2.0-23-generic x86_64)
+        * Documentation:  https://help.ubuntu.com/
+
+        Get cloud support with Ubuntu Advantage Cloud Guest:
+            http://www.ubuntu.com/business/services/cloud
+
+        84 packages can be updated.
+        61 updates are security updates.
+
+        Last login: Mon Apr  4 01:04:56 2016 from 189.147.6.184
+        brus@brusulubuntu:~$ 
+
+1. **Let's try docker.** Let's remember this VM has docker pre-installed. So run the following command:
+```Shell
+docker run hello-world
+```
+So after a few seconds we should have an output like this:
+
+        Unable to find image 'hello-world:latest' locally
+        latest: Pulling from library/hello-world
+        03f4658f8b78: Pull complete 
+        a3ed95caeb02: Pull complete 
+        Digest: sha256:8be990ef2aeb16dbcb9271ddfe2610fa6658d13f6dfb8bc72074cc1ca36966a7
+        Status: Downloaded newer image for hello-world:latest
+
+        Hello from Docker.
+        This message shows that your installation appears to be working correctly.
+
+        To generate this message, Docker took the following steps:
+        1. The Docker client contacted the Docker daemon.
+        2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+        3. The Docker daemon created a new container from that image which runs the
+            executable that produces the output you are currently reading.
+        4. The Docker daemon streamed that output to the Docker client, which sent it
+            to your terminal.
+
+        To try something more ambitious, you can run an Ubuntu container with:
+        $ docker run -it ubuntu bash
+
+        Share images, automate workflows, and more with a free Docker Hub account:
+        https://hub.docker.com
+
+        For more examples and ideas, visit:
+        https://docs.docker.com/userguide/
+</code></pre>
+</div>
+
+<p>The cool thing behind docker is that if we run this command again, we won’t have to download the image again. It will re-use the image that we just downloaded :)</p>
+
+
+	</div>
+  </div>
+</article>
+
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <ul class="pager blog-pager">
+      
+      
+      <li class="next">
+        <a href="/2016-04-18-jekyll-docker/" data-toggle="tooltip" data-placement="top" title="Set up Jekyll from you your Docker VM in Azure">Next Post &rarr;</a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<div class="row disqus-comments">
+  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    
+
+  </div>
+</div>
+
+
+    </div>
+
+    <footer>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/brusmx" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/brusmx" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://twitter.com/brusmx" title="Twitter">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="mailto:youremail@domain.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://linkedin.com/in/brunomedina" title="LinkedIn">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+          <li>
+            <a href="https://stackoverflow.com/users/5461000/bruno-medina" title="StackOverflow">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+		  <li>
+			<a href="/feed.xml" title="RSS">
+			  <span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+			  </span>
+			</a>
+		  </li>		
+          		  
+        </ul>
+        <p class="copyright text-muted">
+		  Bruno Medina Bolaños Cacho
+		  &nbsp;&bull;&nbsp;
+		  2016
+		  
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://brunomedina.mx">brunomedina.mx</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- everything has to be repeated twice because on 2016-02-01 GitHub pages migrated to jekyll 3; see bug https://github.com/jekyll/jekyll/issues/4439 -->
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+
+
+
+  </body>
+</html>
