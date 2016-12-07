@@ -76,7 +76,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     ```bash
     SP_NAME=`echo $SP_JSON | jq -r '.name'`
     SP_PASS=`echo $SP_JSON | jq -r '.password'`
-    SP_TENANT=`echo $SP_JSON | jq -r '.tenant'
+    SP_TENANT=`echo $SP_JSON | jq -r '.tenant'`
     ```
 
     You can verify that your Service Principal works by logging in with the following command.
@@ -183,7 +183,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 
     ```bash
     CLUSTER_NAME=mysupercluster
-    azure group deployment create \
+    az group deployment create \
         --name="${CLUSTER_NAME}" \
         --resource-group="${RG_NAME}" \
         --template-file="./_output/<INSTANCE>/azuredeploy.json" \
