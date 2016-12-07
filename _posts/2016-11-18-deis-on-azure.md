@@ -56,8 +56,8 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 
     ```bash
     SUBSCRIPTION_ID=61fcfcb0-5cbf-4081-94a3-4be06a6e153d
-    SP_JSON=`az account set --subscription="${SUBSCRIPTION_ID}"
-    az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
+    az account set --subscription="${SUBSCRIPTION_ID}"
+    SP_JSON=`az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
     ```
 
     This will output something like this:
