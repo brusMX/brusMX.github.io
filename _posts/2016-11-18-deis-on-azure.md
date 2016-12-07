@@ -1,7 +1,9 @@
 ---
 layout: post
-title: Set up DEIS on top of Kubernetes on Azure Container Service (ACS) with ACS Engine
+title: Set up DEIS on Azure 
 ---
+
+First, we will deploy an Azure Container Service (ACS) running Kubernetes with [ACS Engine](https://github.com/Azure/acs-engine). Then we will install DEIS on top of this cluster.
 
 ## Requirements
 
@@ -16,12 +18,13 @@ title: Set up DEIS on top of Kubernetes on Azure Container Service (ACS) with AC
 
 1. The easiest way to do this is by getting the new Azure CLI installed. You can follow the instructions [here](https://github.com/Azure/azure-cli/blob/master/doc/preview_install_guide.md), and basically if you are running Bash on Windows 10 (Build 14362+) with Python 2.7.6, you should do the following:
 
-    ```bash
+    ```Bash
     sudo apt-get update
     sudo apt-get install -y libssl-dev libffi-dev
     sudo apt-get install -y python-dev
     curl -L https://aka.ms/InstallAzureCli | sudo bash
     ```
+
     Or if you are running Mac OS X:
 
     ```bash
