@@ -16,22 +16,24 @@ title: Set up your Docker VM from the Azure Market Place
 
 1. **(Optional) Create an SSH key.** 
 The only thing you need to do is create the RSA key with the following command in your terminal (don't forget to put your mail address instead of the placeholder).
-    
+
 ```Shell
 ssh-keygen -t rsa -b 4096 -C "mymail@brus.ml"
 ```
+
 2.- After this command you will be asked for a location to save your powerful key.
 
-```Shell      
+```Shell
 Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
 ```
 
 2. Don't forget the passphrase you use in the next step:
 
-```Shell
-    Enter passphrase (empty for no passphrase): [Type a passphrase]
-    Enter same passphrase again: [Type passphrase again]
-``` 
+    ```Shell
+        Enter passphrase (empty for no passphrase): [Type a passphrase]
+        Enter same passphrase again: [Type passphrase again]
+    ``` 
+
 4. Now, after your key has been created just *cat* the content of your public key (if you used a different location, make sure you use the correct file).
 
 ```Shell
