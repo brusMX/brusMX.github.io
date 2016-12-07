@@ -3,7 +3,7 @@ layout: post
 title: Set up DEIS on Azure 
 ---
 
-First, we will deploy an Azure Container Service (ACS) running Kubernetes with [ACS Engine](https://github.com/Azure/acs-engine). Then we will install DEIS on top of this cluster.
+First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft.com/en-us/services/container-service/) running [Kubernetes](http://kubernetes.io/) with [ACS Engine](https://github.com/Azure/acs-engine). Then we will install [DEIS](https://deis.com/) on top of this cluster.
 
 ## Requirements
 
@@ -213,8 +213,9 @@ First, we will deploy an Azure Container Service (ACS) running Kubernetes with [
     ```bash
     kubectl --namespace=deis get pods -w
     ```
-    
+
     Your output should look like this:
+
     ```bash
     NAME                                     READY     STATUS    RESTARTS   AGE
     deis-builder-415246326-pngpz             0/1       Running   0          2m
