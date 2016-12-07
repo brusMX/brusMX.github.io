@@ -74,7 +74,7 @@ url-pretty: "brunomedina.mx"  # eg. "deanattali.com/beautiful-jekyll"
 
 # Output options (more information on Jekyll's site)
 timezone: "America/Mexico_City"
-markdown: kramdown
+markdown: redcarpet
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
 paginate: 5
