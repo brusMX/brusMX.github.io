@@ -201,7 +201,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     kubectl cluster-info
     ```
 
-1. Install DEIS
+1. Install DEIS, run each command one by one:
 
     ```bash
     helmc repo add deis https://github.com/deis/charts
@@ -210,6 +210,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     helmc install workflow-v2.8.0
     ```
 1. See how yor pods are being created:
+
     ```bash
     kubectl --namespace=deis get pods -w
     ```
@@ -266,6 +267,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     ```
 
 1. Create an empty application:
+
     ```bash
     ~ ❯❯❯ deis create --no-remote
     Creating Application... done, created sanest-radiator
