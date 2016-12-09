@@ -12,7 +12,8 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 - [jq](https://stedolan.github.io/jq/) to parse the json responses in the console
 - [ACS Engine](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md#linux)
 - [Kubectl](http://kubernetes.io/docs/getting-started-guides/kubectl/)
-- [DEIS and Helm classic](https://deis.com/docs/workflow/quickstart/install-cli-tools/)
+- [DEIS]https://deis.com/docs/workflow/quickstart/install-cli-tools/)
+- [HELM](https://github.com/kubernetes/helm/blob/master/docs/install.md)
 
 ## Steps 
 
@@ -183,11 +184,8 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 
     ```bash
     CLUSTER_NAME=mysupercluster
-    az group deployment create \
-        --name="${CLUSTER_NAME}" \
-        --resource-group="${RG_NAME}" \
-        --template-file="./_output/<INSTANCE>/azuredeploy.json" \
-        --parameters-file="./_output/<INSTANCE>/azuredeploy.parameters.json"
+    cd _output/<INSTANCE>
+    az resource group deployment create --resource-group="{RG_NAME}" --template-file="azuredeploy.json" --name="${CLUSTER_NAME}" --parameters @azuredeploy.parameters.json
     ```
 
 1. Copy the `.kube/config` file into your console. If you have more kubernetes clusters you can create a custom name for your file and then use the environment variable `$KUBECONFIG` to indicate the one you want to use. If this is your only cluster, just make sure to have it the config file in this location `~/.kube/config` using the folowing command:
@@ -197,6 +195,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     ```
 
 1. Check the cluster info now:
+
     ```bash
     kubectl cluster-info
     ```
