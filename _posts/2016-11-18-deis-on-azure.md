@@ -15,7 +15,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 - [DEIS](https://deis.com/docs/workflow/quickstart/install-cli-tools/)
 - [HELM](https://github.com/kubernetes/helm/blob/master/docs/install.md)
 
-## Steps 
+## Steps
 
 1. The easiest way to do this is by getting the new Azure CLI installed. You can follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2), and basically if you are running Bash on Windows 10 (Build 14362+) with Python 2.7.6, you should do the following:
 
@@ -59,7 +59,6 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     SUBSCRIPTION_ID=98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0
     az account set --subscription="${SUBSCRIPTION_ID}"
     SP_JSON=`az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
-    echo 
     ```
 
     This has set up the json response in the environment variable `SP_JSON` we can run `echo $SP_JSON` and it will output something like this:
@@ -98,8 +97,8 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
         "state": "Enabled",
         "tenantId": "xxxxxxx-xxx-xxx-xxx-fxxxxx4",
         "user": {
-        "name": "super@cool.mail.com",
-        "type": "user"
+            "name": "http://azure-cli-2016-12-xxxxx-47",
+            "type": "servicePrincipal"
         }
     },
     ```
