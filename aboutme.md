@@ -41,7 +41,6 @@ Well, I was the architect for this project and I designed all the services to li
 <br/>Mexico City, Mexico. 2005-2011
 <br/>[Study Plan (spanish)](https://www.itam.mx/es/documentos/plan_ing_computacion.pdf)
 
-
 - **B.Sc. Applied Mathematics** 
 <br/>Instituto Tecnológico Autónomo De México ([ITAM](http://itam.mx))
 <br/>Mexico City, Mexico. 2005-2011
@@ -50,7 +49,7 @@ Well, I was the architect for this project and I designed all the services to li
 - **Architect of distributed Services** (Study abroad)
 <br/>[Télécom Sudparis](http://www.telecom-sudparis.eu/)
 <br/>Évry, France. 2009-2010
-<br/>[Study Plan (english)](http://asr.telecom-sudparis.eu/admin/Syllabus_VAP_ASR_english.pdf)
+<br/>[Study Plan (french)](http://www-inf.int-evry.fr/cours/ASR/09-10/admin/VAP_ASR_VF.pdf)
 
 ## My jobs
 
@@ -58,8 +57,7 @@ Well, I was the architect for this project and I designed all the services to li
 
 #### Microsoft México
 **Senior Technical Evangelist** 
-<br/>*September 2015 to date*
-<br/>Father company of the app SkyAlert. 
+<br/>*September 2015 to date* 
 <br/>Responsibilities:
 
 - *Cloud computing architecture*
