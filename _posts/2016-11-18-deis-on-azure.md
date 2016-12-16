@@ -100,14 +100,14 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
             "name": "http://azure-cli-2016-12-xxxxx-47",
             "type": "servicePrincipal"
         }
-    },
+    }
     ```
 
-1. Create the resource group
+1. Lets think of a name and put it in one more env variable called `RG_NAME` so we can use it later. For this tutorial I am choosing `southcentralus` as my location, please consider that for some Azure subscriptions not all the locations are available.
 
     ```bash
-    RG_NAME=myresourcegroup
-    az resource group create --name "${RG_NAME}" --location southcentralus
+    RG_NAME=spreecommerce
+    az group create --name "${RG_NAME}" --location southcentralus
     ```
 
     You should get the following output:
