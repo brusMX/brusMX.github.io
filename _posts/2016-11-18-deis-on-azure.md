@@ -56,7 +56,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Use the subscription id `"id": "98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0"`from the previous step and replace it in the following commands to set it as a shell variable that can be used in the creation of the [RBAC role](https://docs.microsoft.com/en-us/azure/active-directory/role-based-access-control-what-is). We will collect this info in the `SP_JSON` environment variable to use it later.
 
     ```bash
-    SUBSCRIPTION_ID=98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0
+    export SUBSCRIPTION_ID=98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0
     az account set --subscription="${SUBSCRIPTION_ID}"
     SP_JSON=`az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
     ```
@@ -75,9 +75,9 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     For convenience we can use `jq` to set up more precise environment variables from the json we just collected, these variables will be used in the following steps instead of actually having to remember the actual value:
 
     ```bash
-    SP_NAME=`echo $SP_JSON | jq -r '.name'`
-    SP_PASS=`echo $SP_JSON | jq -r '.password'`
-    SP_TENANT=`echo $SP_JSON | jq -r '.tenant'`
+    export SP_NAME=`echo $SP_JSON | jq -r '.name'`
+    export SP_PASS=`echo $SP_JSON | jq -r '.password'`
+    export SP_TENANT=`echo $SP_JSON | jq -r '.tenant'`
     ```
 
     You can verify that your Service Principal works by logging in with the following command.
@@ -106,7 +106,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Lets think of a name and put it in one more env variable called `RG_NAME` so we can use it later. For this tutorial I am choosing `southcentralus` as my location, please consider that for some Azure subscriptions not all the locations are available.
 
     ```bash
-    RG_NAME=spreecommerce
+    export RG_NAME=spreecommerce
     az group create --name "${RG_NAME}" --location southcentralus
     ```
 
@@ -173,7 +173,51 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     ```
 
     Replace the `<<< YOUR CLUSTER NAME >>>`, `<<< YOUR SSH PUBLIC KEY >>>` `<<< YOUR SP NAME >>>` and `<<< YOUR SP PASSWORD >>>` with your information.
+1. Instead, you can also use the following command to paste all the information automatically, just make sure you choose a unique custom name for your `dnsPrefix`. Also, this command requires that you have followed this tutorial instructions and you actually have `$SP_NAME`, `$SP_PASS` as environment variables. Also, your ssh key will be the one in ~/.ssh/id_rsa.pub without passphrase and your terminal username will be that will be used to access the cluster.
 
+    ```bash
+    export RG_DNS_NAME=ecocluster1
+    ```
+
+    ```bash
+    cat <<EOT >> mideploy.json
+    {
+        "apiVersion": "vlabs",
+        "properties": {
+            "orchestratorProfile": {
+            "orchestratorType": "Kubernetes"
+            },
+            "masterProfile": {
+            "count": 1,
+            "dnsPrefix": "`echo $RG_DNS_NAME`",
+            "vmSize": "Standard_D2_v2"
+            },
+            "agentPoolProfiles": [
+            {
+                "name": "agentpool1",
+                "count": 3,
+                "vmSize": "Standard_D2_v2",
+                "availabilityProfile": "AvailabilitySet"
+            }
+            ],
+            "linuxProfile": {
+            "adminUsername": "`echo $USERNAME`",
+            "ssh": {
+                "publicKeys": [
+                {
+                    "keyData": "`cat $HOME/.ssh/id_rsa.pub`"
+                }
+                ]
+            }
+            },
+            "servicePrincipalProfile": {
+            "servicePrincipalClientID": "`echo $SP_NAME`",
+            "servicePrincipalClientSecret": "`echo $SP_PASS`"
+            }
+        }
+    }
+    EOT
+    ```
 1. Generate the json files with the ACS engine
 
     ```bash
