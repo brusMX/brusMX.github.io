@@ -56,23 +56,24 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Use the subscription id `"id": "98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0"`from the previous step and replace it in the following commands to set it as a shell variable that can be used in the creation of the [RBAC role](https://docs.microsoft.com/en-us/azure/active-directory/role-based-access-control-what-is). We will collect this info in the `SP_JSON` environment variable to use it later.
 
     ```bash
-    SUBSCRIPTION_ID=61fcfcb0-5cbf-4081-94a3-4be06a6e153d
+    SUBSCRIPTION_ID=98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0
     az account set --subscription="${SUBSCRIPTION_ID}"
     SP_JSON=`az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"`
+    echo 
     ```
 
-    This will output something like this:
+    This has set up the json response in the environment variable `SP_JSON` we can run `echo $SP_JSON` and it will output something like this:
 
     ```json
     {
-        "appId": "472ffb42-2697-4605-8923-b435a366dac2",
-        "name": "http://azure-cli-2016-12-06-10-49-47",
-        "password": "fa36b25b-6e57-4b16-9100-d31ae55bc222",
-        "tenant": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        "appId": "47xxxxx-xxxx-xxxx-xxxx-xxxxxdac2",
+        "name": "http://azure-cli-2016-12-xxxxx-47",
+        "password": "faxxxx-xxxx-xxxx-xxxx-xxxx5bc222",
+        "tenant": "72fxxxx-xxxx-xxxx-xxxx-xxxxx11db47"
     }
     ```
 
-    Set up the environment variables fro convenience from the json we just collected:
+    For convenience we can use `jq` to set up more precise environment variables from the json we just collected, these variables will be used in the following steps instead of actually having to remember the actual value:
 
     ```bash
     SP_NAME=`echo $SP_JSON | jq -r '.name'`
