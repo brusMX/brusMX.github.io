@@ -12,12 +12,12 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 - [jq](https://stedolan.github.io/jq/) to parse the json responses in the console
 - [ACS Engine](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md#linux)
 - [Kubectl](http://kubernetes.io/docs/getting-started-guides/kubectl/)
-- [DEIS]https://deis.com/docs/workflow/quickstart/install-cli-tools/)
+- [DEIS](https://deis.com/docs/workflow/quickstart/install-cli-tools/)
 - [HELM](https://github.com/kubernetes/helm/blob/master/docs/install.md)
 
 ## Steps 
 
-1. The easiest way to do this is by getting the new Azure CLI installed. You can follow the instructions [here](https://github.com/Azure/azure-cli/blob/master/doc/preview_install_guide.md), and basically if you are running Bash on Windows 10 (Build 14362+) with Python 2.7.6, you should do the following:
+1. The easiest way to do this is by getting the new Azure CLI installed. You can follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-az-cli2), and basically if you are running Bash on Windows 10 (Build 14362+) with Python 2.7.6, you should do the following:
 
     ```Bash
     sudo apt-get update
