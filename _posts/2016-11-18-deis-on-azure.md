@@ -8,6 +8,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 ## Requirements
 
 - [Windows 10 bash](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) or other unix based terminal.
+- SSH keys and your console ready to connect to a server
 - [Go](https://golang.org/doc/install) programming language
 - [jq](https://stedolan.github.io/jq/) to parse the json responses in the console
 - [ACS Engine](https://github.com/Azure/acs-engine/blob/master/docs/acsengine.md#linux)
@@ -124,63 +125,15 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
         "tags": null
     }
     ```
-
-1. Since Go and ACS Engine is already installed. We will proceed to generate a template from the `example/kubernetes.json` file in the `acs-engine` folder that you have previously installed.
+1. Since Go and ACS Engine is already installed. You can also use the following command to paste all the information automatically into the deploying json file that `acs-engine` will be using. Just make sure you choose a unique custom name for your `RG_DNS_NAME`. Also, this command requires that you have followed this tutorial instructions and you actually have `$SP_NAME`, `$SP_PASS` as environment variables. Also, your ssh key will be the one in `~/.ssh/id_rsa.pub` without passphrase and your terminal username will used to access the cluster. If you did not follow the tutorial step by step go to the next step.
 
     ```bash
     cd $GOPATH/src/github.com/Azure/acs-engine
-    cp examples/kubernetes.json examples/my_kubernetes.json
-    ```
-
-    Now lets open the file:
-
-    ```json
-    {
-        "apiVersion": "vlabs",
-        "properties": {
-            "orchestratorProfile": {
-            "orchestratorType": "Kubernetes"
-            },
-            "masterProfile": {
-            "count": 1,
-            "dnsPrefix": "<<< YOUR CLUSTER NAME >>>",
-            "vmSize": "Standard_D2_v2"
-            },
-            "agentPoolProfiles": [
-                {
-                    "name": "agentpool1",
-                    "count": 3,
-                    "vmSize": "Standard_D2_v2",
-                    "availabilityProfile": "AvailabilitySet"
-                }
-            ],
-            "linuxProfile": {
-            "adminUsername": "azureuser",
-            "ssh": {
-                "publicKeys": [
-                    {
-                        "keyData":"<<< YOUR SSH PUBLIC KEY >>>"
-                    }
-                ]
-            }
-            },
-            "servicePrincipalProfile": {
-                "servicePrincipalClientID": "<<< YOUR SP NAME >>>",
-                "servicePrincipalClientSecret": "<<< YOUR SP PASSWORD >>>"
-            }
-        }
-    }
-    ```
-
-    Replace the `<<< YOUR CLUSTER NAME >>>`, `<<< YOUR SSH PUBLIC KEY >>>` `<<< YOUR SP NAME >>>` and `<<< YOUR SP PASSWORD >>>` with your information.
-1. Instead, you can also use the following command to paste all the information automatically, just make sure you choose a unique custom name for your `dnsPrefix`. Also, this command requires that you have followed this tutorial instructions and you actually have `$SP_NAME`, `$SP_PASS` as environment variables. Also, your ssh key will be the one in ~/.ssh/id_rsa.pub without passphrase and your terminal username will be that will be used to access the cluster.
-
-    ```bash
     export RG_DNS_NAME=ecocluster1
     ```
 
     ```bash
-    cat <<EOT >> mideploy.json
+    cat <<EOT >> my_acs_deploy.json
     {
         "apiVersion": "vlabs",
         "properties": {
@@ -218,24 +171,75 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     }
     EOT
     ```
-1. Generate the json files with the ACS engine
+
+    After its generated make sure to give it and verify that the file is complete and all the needed fields are not empty with `cat my_acs_deploy.json`.
+
+1. __(OPTIONAL)__ Follow this step **ONLY** if you weren't able to run the previous step. We will proceed to generate a template from the `example/kubernetes.json` file in the `acs-engine` folder that you have previously installed.
 
     ```bash
-    ./acs-engine examples/my_kubernetes.json
+    cd $GOPATH/src/github.com/Azure/acs-engine
+    cp examples/kubernetes.json my_acs_deploy.json
     ```
 
-    Deploy them:
+    Now lets open the file:
+
+    ```json
+    {
+        "apiVersion": "vlabs",
+        "properties": {
+            "orchestratorProfile": {
+            "orchestratorType": "Kubernetes"
+            },
+            "masterProfile": {
+            "count": 1,
+            "dnsPrefix": "<<< YOUR CLUSTER UNIQUE NAME >>>",
+            "vmSize": "Standard_D2_v2"
+            },
+            "agentPoolProfiles": [
+                {
+                    "name": "agentpool1",
+                    "count": 3,
+                    "vmSize": "Standard_D2_v2",
+                    "availabilityProfile": "AvailabilitySet"
+                }
+            ],
+            "linuxProfile": {
+            "adminUsername": "<<< YOUR ACS USERNAME >>>",
+            "ssh": {
+                "publicKeys": [
+                    {
+                        "keyData":"<<< YOUR SSH PUBLIC KEY >>>"
+                    }
+                ]
+            }
+            },
+            "servicePrincipalProfile": {
+                "servicePrincipalClientID": "<<< YOUR SP NAME >>>",
+                "servicePrincipalClientSecret": "<<< YOUR SP PASSWORD >>>"
+            }
+        }
+    }
+    ```
+
+    Replace the `<<< YOUR CLUSTER UNIQUE NAME >>>`, `<<< YOUR SSH PUBLIC KEY >>>` `<<< YOUR SP NAME >>>` and `<<< YOUR SP PASSWORD >>>`, <<< YOUR ACS USERNAME >>> with your information.
+
+1. Generate the json files with the ACS engine using the generated json template into the folder `myACSCluster`
 
     ```bash
-    CLUSTER_NAME=mysupercluster
-    cd _output/<INSTANCE>
-    az resource group deployment create --resource-group="{RG_NAME}" --template-file="azuredeploy.json" --name="${CLUSTER_NAME}" --parameters @azuredeploy.parameters.json
+    ./acs-engine -artifacts myACSCluster my_acs_deploy.json
     ```
 
+1. Deploy the cluster with your new generated ARM templates
+
+    ```bash
+    az group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
+    ```
+
+    **Note:** It will take a couple of minutes, so be patient and do not kill the command.
 1. Copy the `.kube/config` file into your console. If you have more kubernetes clusters you can create a custom name for your file and then use the environment variable `$KUBECONFIG` to indicate the one you want to use. If this is your only cluster, just make sure to have it the config file in this location `~/.kube/config` using the folowing command:
 
     ```bash
-    scp azureuser@myclustername.northeurope.cloudapp.azure.com:.kube/config ~/.kube/config
+    scp ${USERNAME}@${RG_DNS_NAME}.southcentralus.cloudapp.azure.com:.kube/config ~/.kube/config
     ```
 
 1. Check the cluster info now:
