@@ -50,7 +50,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
         "name": "super@cool.mail.com",
         "type": "user"
         }
-    },
+    }
     ```
 
 1. Use the subscription id `"id": "98xxx7d-bxx8-sxx2-txx4-a2dxxxxxxxp0"`from the previous step and replace it in the following commands to set it as a shell variable that can be used in the creation of the [RBAC role](https://docs.microsoft.com/en-us/azure/active-directory/role-based-access-control-what-is). We will collect this info in the `SP_JSON` environment variable to use it later.
