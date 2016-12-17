@@ -330,7 +330,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Get the ip from the router
 
     ```bash
-    kubectl --namespace=deis describe svc deis-router
+    kubectl --namespace=deis describe svc deis-router | grep "LoadBalancer Ingress"
     ```
 
     You should look for `LoadBalancer Ingeress` IP address.
@@ -338,13 +338,19 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Using that ip use the controller url to register a new user in the cluster
 
     ```bash
-    deis register http://deis."${LB_IP}".nip.io
+    deis register http://deis.<<LOADBALANCER INGRESS IP>>.nip.io
     ```
+
+    Give it an username, password and email.
 
 1. Create an empty application:
 
     ```bash
-    ~ ❯❯❯ deis create --no-remote
+    deis create --no-remote
+    ````
+    And confirm that everything is correct by getting a cool random app name like `sanest-radiator``
+
+    ```bash
     Creating Application... done, created sanest-radiator
     If you want to add a git remote for this app later, use `deis git:remote -a sanest-radiator`
     ```
