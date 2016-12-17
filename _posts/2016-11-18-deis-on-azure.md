@@ -238,6 +238,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     **Note:** It will take a couple of minutes, so be patient and do not kill the command.
 
     The output you will see will be something like this with the word Succeeded on the provisioning state:
+
     ```json
     ....
           }
@@ -257,7 +258,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     mkdir .kube #make sure you have this folder
     scp ${USERNAME}@${RG_DNS_NAME}.southcentralus.cloudapp.azure.com:.kube/config ~/.kube/config
     ```
-    
+
     **Note:** If you have more kubernetes clusters you can create a custom name for each file and then use the environment variable `$KUBECONFIG` to indicate the one you want to use.
 
 1. Check the cluster info:
