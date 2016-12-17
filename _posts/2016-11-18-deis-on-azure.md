@@ -275,15 +275,14 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     kubernetes-dashboard is running at https://${RG_DNS_NAME}.southcentralus.cloudapp.azure.com/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
     ```
 
-1. Install DEIS, run each command one by one:
+1. Install `workflow`, run each command one by one, you will need to have `helm` and `deis` installed:
 
     ```bash
-    helmc repo add deis https://github.com/deis/charts
-    helmc fetch deis/workflow-v2.8.0
-    helmc generate -x manifests workflow-v2.8.0
-    helmc install workflow-v2.8.0
+    helm init
+    helm repo add deis https://charts.deis.com/workflow
+    helm install deis/workflow --namespace deis
     ```
-1. See how yor pods are being created:
+1. See how yor pods are being created in another terminal:
 
     ```bash
     kubectl --namespace=deis get pods -w
@@ -325,6 +324,8 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     deis-monitor-telegraf-ehy32   0/1       Error     0         2m
     deis-monitor-telegraf-ehy32   1/1       Running   1         2m
     ```
+
+    To exit, press `Ctr + C`
 
 1. Get the ip from the router
 
