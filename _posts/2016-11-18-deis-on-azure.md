@@ -236,16 +236,40 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     ```
 
     **Note:** It will take a couple of minutes, so be patient and do not kill the command.
-1. Copy the `.kube/config` file into your console. If you have more kubernetes clusters you can create a custom name for your file and then use the environment variable `$KUBECONFIG` to indicate the one you want to use. If this is your only cluster, just make sure to have it the config file in this location `~/.kube/config` using the folowing command:
 
-    ```bash
-    scp ${USERNAME}@${RG_DNS_NAME}.southcentralus.cloudapp.azure.com:.kube/config ~/.kube/config
+    The output you will see will be something like this with the word Succeeded on the provisioning state:
+    ```json
+    ....
+          }
+        ],
+        "provisioningState": "Succeeded",
+        "template": null,
+        "templateLink": null,
+        "timestamp": "2016-12-16T23:27:28.621503+00:00"
+    },
+    "resourceGroup": "spreecommerce"
+    }
     ```
 
-1. Check the cluster info now:
+1. After creating the cluster we need to use `kubectl` to connect with our cluster, make sure you have that installed before following the next part. To get control of the cluster just make sure to have it the config file in this location `~/.kube/config`.
+
+    ```bash
+    mkdir .kube #make sure you have this folder
+    scp ${USERNAME}@${RG_DNS_NAME}.southcentralus.cloudapp.azure.com:.kube/config ~/.kube/config
+    ```
+    **Note:** If you have more kubernetes clusters you can create a custom name for each file and then use the environment variable `$KUBECONFIG` to indicate the one you want to use.
+
+1. Check the cluster info:
 
     ```bash
     kubectl cluster-info
+    ```
+
+    ```bash
+    Kubernetes master is running at https://${RG_DNS_NAME}.southcentralus.cloudapp.azure.com
+    Heapster is running at https://${RG_DNS_NAME}.southcentralus.cloudapp.azure.com/api/v1/proxy/namespaces/kube-system/services/heapster
+    KubeDNS is running at https://${RG_DNS_NAME}.southcentralus.cloudapp.azure.com/api/v1/proxy/namespaces/kube-system/services/kube-dns
+    kubernetes-dashboard is running at https://${RG_DNS_NAME}.southcentralus.cloudapp.azure.com/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard
     ```
 
 1. Install DEIS, run each command one by one:
