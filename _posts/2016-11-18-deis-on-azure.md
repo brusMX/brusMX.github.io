@@ -240,15 +240,16 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     The output you will see will be something like this with the word Succeeded on the provisioning state:
 
     ```json
-    ....
-          }
-        ],
-        "provisioningState": "Succeeded",
-        "template": null,
-        "templateLink": null,
-        "timestamp": "2016-12-16T23:27:28.621503+00:00"
-    },
-    "resourceGroup": "spreecommerce"
+    {
+        {
+        ....
+
+            "provisioningState": "Succeeded",
+            "template": null,
+            "templateLink": null,
+            "timestamp": "2016-12-16T23:27:28.621503+00:00"
+        },
+        "resourceGroup": "spreecommerce"
     }
     ```
 
