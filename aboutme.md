@@ -60,14 +60,11 @@ Well, I was the architect for this project and I designed all the services to li
 <br/>*September 2015 to date* 
 <br/>Responsibilities:
 
-- *Cloud computing architecture*
-    - Amazon Web Services design and architecture: EC2, S3, Route 53, RDS, SES.
-    - Microsoft Azure solution design and architecture: Mobile Services, Blob Storage, Redis Cache, VM, Notification Hub, Websites, CDN.
-- *Database design:* MongoDB, Postgres, MySQL, SQL Azure, SQLite. 
-- *App architectural design and development:* Windows Phone 8, Windows 8.1, iOS and Android
-- *Project management:* Requirements analysis, cost estimation, Pre-sales and sales negotiation, kanban assignation.
-- *Software deployment:* Staging and production enviroment configuration, webhooks, servers set-up, certificates installation.
-
+- Trusted advisor to ISV partners (Office 365 integration, Windows 10 app development, Azure workload migration)
+- Executing Architecture Design Sessions (ADS) and Proofs of Concept (POC) 
+- Workshops, conferences and hackathons for our Dev communities and, IT Camps for our IT Pro communities.
+- Evangelizing and engaging with No-MSFT communities and meet ups (Azure and DevTools adoption)
+- Video production for [CH9](https://channel9.msdn.com/Niners/BrunoMedina) and MVA.
 [Company's Website](https://www.microsoft.com/es-mx/)
 <hr/>
 
