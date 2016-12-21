@@ -65,7 +65,7 @@ Well, I was the architect for this project and I designed all the services to li
 - Workshops, conferences and hackathons for our Dev communities and, IT Camps for our IT Pro communities.
 - Evangelizing and engaging with No-MSFT communities and meet ups (Azure and DevTools adoption)
 - Video production for [CH9](https://channel9.msdn.com/Niners/BrunoMedina) and MVA.
-[Company's Website](https://www.microsoft.com/es-mx/)
+<br/>[Company's Website](https://www.microsoft.com/es-mx/)
 <hr/>
 
 #### Disappster SAPI de CV
