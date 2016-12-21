@@ -3,7 +3,7 @@ layout: post
 title: Set up DEIS on Azure using ACS Engine 
 ---
 
-First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft.com/en-us/services/container-service/) running [Kubernetes](http://kubernetes.io/) with [ACS Engine](https://github.com/Azure/acs-engine). Then we will install [DEIS](https://deis.com/) on top of this cluster.
+First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft.com/en-us/services/container-service/) running [Kubernetes](http://kubernetes.io/) with [ACS Engine](https://github.com/Azure/acs-engine). Then we will install [DEIS](https://deis.com/) on top of this cluster and create an empty app.
 
 ## Requirements
 
