@@ -3,7 +3,7 @@ layout: post
 title: How to connect through VNC to Ubuntu on Azure
 ---
 
-Connecting to an ubuntu box using VNC.
+Connecting to an Ubuntu Server using VNC. Note*:
 
 ## Requirements 
 
@@ -132,9 +132,9 @@ Connecting to an ubuntu box using VNC.
 
 1. Make a tunnel
 
-```Bash
-ssh -L 5901:127.0.0.1:5901 -N -f -l
-```
+    ```Bash
+    ssh -L 5901:127.0.0.1:5901 -N -f -l
+    ```
 
 1. Open VNC viewer and connect to `localhost:5901`
 
