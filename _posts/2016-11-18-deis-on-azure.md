@@ -394,7 +394,7 @@ In step 7, you created the artifacts by running `./acs-engine -artifacts myACSCl
 }
 ```
 
-Here you can see that there is a property called `agentPoolProfiles` that contains the amount of agents the cluster can have. Let's just update with vi (or nano) that value from three to five and save it.
+Here you can see that there is a property called `agentPoolProfiles` that contains the amount of agents the cluster can have. Let's just update it with vi (or nano) that value from three to five and save it.
 
 ```json
     "agentPoolProfiles": [
@@ -410,13 +410,13 @@ Here you can see that there is a property called `agentPoolProfiles` that contai
 
 To add the nodes we must `acs-engine` to re-generate the `json` files for the cluster using the `apimodel.json` file. This command will replace the following files: `azuredeploy.parameters.json`, `azuredeploy.json` and `apimodel.json`.
 
-```Bash
+```bash
 ./acs-engine -artifacts myACSCluster myACSCluster/apimodel.json
 ```
 
 Finally re-run the deployment of the cluster with the following command:
 
-```Bash
+```bash
 az resource group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
 ```
 
