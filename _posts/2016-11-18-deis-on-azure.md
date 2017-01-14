@@ -108,7 +108,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 
     ```bash
     export RG_NAME=spreecommerce
-    az group create --name "${RG_NAME}" --location southcentralus
+    az resource group create --name "${RG_NAME}" --location southcentralus
     ```
 
     You should get the following output:
@@ -221,7 +221,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     }
     ```
 
-    Replace the `<<< YOUR CLUSTER UNIQUE NAME >>>`, `<<< YOUR SSH PUBLIC KEY >>>` `<<< YOUR SP NAME >>>` and `<<< YOUR SP PASSWORD >>>`, <<< YOUR ACS USERNAME >>> with your information.
+    Replace the `<<< YOUR CLUSTER UNIQUE NAME >>>`, `<<< YOUR SSH PUBLIC KEY >>>` `<<< YOUR SP NAME >>>` and `<<< YOUR SP PASSWORD >>>`, `<<< YOUR ACS USERNAME >>>` with your information.
 
 1. Generate the json files with the ACS engine using the generated json template into the folder `myACSCluster`
 
@@ -232,7 +232,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
 1. Deploy the cluster with your new generated ARM templates
 
     ```bash
-    az group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
+    az resource group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
     ```
 
     **Note:** It will take a couple of minutes, so be patient and do not kill the command.
@@ -333,7 +333,7 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     kubectl --namespace=deis describe svc deis-router | grep "LoadBalancer Ingress"
     ```
 
-    You should look for `LoadBalancer Ingeress` IP address.
+    You should look for `LoadBalancer Ingeress` IP address, if nothing comes out you should wait a little longer.
 
 1. Using that ip use the controller url to register a new user in the cluster
 
@@ -354,3 +354,70 @@ First, we will deploy an [Azure Container Service (ACS)](https://azure.microsoft
     Creating Application... done, created sanest-radiator
     If you want to add a git remote for this app later, use `deis git:remote -a sanest-radiator`
     ```
+
+## Adding nodes on the fly
+
+Thanks to `acs-engine` we are able to accomplish this in a simple but (a little) obscure way.
+In step 7, you created the artifacts by running `./acs-engine -artifacts myACSCluster my_acs_deploy.json`, so you will have the following file: `myACSCluster/apimodel.json`. Please, go ahead and review the contents of this file, you will find something like this:
+
+```json
+{
+  "apiVersion": "vlabs",
+  "plan": {},
+  "properties": {
+    "provisioningState": "",
+    "orchestratorProfile": {
+      "orchestratorType": "Kubernetes"
+    },
+    "masterProfile": {
+      "count": 1,
+      "dnsPrefix": "deisy",
+      "vmSize": "Standard_D2_v2",
+      "firstConsecutiveStaticIP": "10.XXX.XXX.X"
+    },
+    "agentPoolProfiles": [
+      {
+        "name": "agentpool1",
+        "count": 3,
+        "vmSize": "Standard_D2_v2",
+        "availabilityProfile": "AvailabilitySet",
+        "storageProfile": "StorageAccount"
+      }
+    ],
+    "linuxProfile": {
+      "adminUsername": "bruno",
+      "ssh": {
+            "publicKeys": [ ...]
+            }
+        }
+    }
+}
+```
+
+Here you can see that there is a property called `agentPoolProfiles` that contains the amount of agents the cluster can have. Let's just update with vi (or nano) that value from three to five and save it.
+
+```json
+    "agentPoolProfiles": [
+      {
+        "name": "agentpool1",
+        "count": 5,
+        "vmSize": "Standard_D2_v2",
+        "availabilityProfile": "AvailabilitySet",
+        "storageProfile": "StorageAccount"
+      }
+    ],
+```
+
+To add the nodes we must `acs-engine` to re-generate the `json` files for the cluster using the `apimodel.json` file. This command will replace the following files: `azuredeploy.parameters.json`, `azuredeploy.json` and `apimodel.json`.
+
+```Bash
+./acs-engine -artifacts myACSCluster myACSCluster/apimodel.json
+```
+
+Finally re-run the deployment of the cluster with the following command:
+
+```Bash
+az resource group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
+```
+
+
