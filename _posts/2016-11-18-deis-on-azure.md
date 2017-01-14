@@ -420,4 +420,10 @@ Finally re-run the deployment of the cluster with the following command:
 az resource group deployment create --resource-group="${RG_NAME}" --template-file="myACSCluster/azuredeploy.json" --name="${RG_DNS_NAME}" --parameters @myACSCluster/azuredeploy.parameters.json
 ```
 
+And you can confirm that you have three new agents up and running in the portal.
 
+![alt text][agents]
+
+
+
+[agents]: ../img/agents.jpg "In a few minutes you will see the agents"
