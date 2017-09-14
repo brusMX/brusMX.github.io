@@ -35,7 +35,7 @@ Azure managed disks is finally on Kubernetes on Azure. Let's use ACS engine with
 
     ```bash
     curl -O https://gist.githubusercontent.com/brusMX/96538826d582388cb3b73a66a023b332/raw/f6fe0ec3ac1ddbbd0ede7e9d49a6eb49026af6a2/obtainAzureSP.sh
-    sh obtainAzureSP.sh
+    ./obtainAzureSP.sh
     ```
 
     You will be using `AZURE_CLIENT_ID` and `AZURE_CLIENT_SECRET` in the next step, so keep them close. Also, remember that if you create a Service Principal for a subscription that was not the default one, you will have to run the following command:
