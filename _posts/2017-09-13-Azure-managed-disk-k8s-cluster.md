@@ -115,5 +115,18 @@ After the cluster has been succesfully deployed we can obtain our kubeconfig fil
 
     ```bash
     kubectl cluster-info
+
+    Kubernetes master is running at https://k8scluster.southcentralus.cloudapp.azure.com
+    Heapster is running at https://k8scluster.southcentralus.cloudapp.azure.com/api/v1/namespaces/kube-system/services/heapster/proxy
+    KubeDNS is running at https://k8scluster.southcentralus.cloudapp.azure.com/api/v1/namespaces/kube-system/services/kube-dns/proxy
+    kubernetes-dashboard is running at https://k8scluster.southcentralus.cloudapp.azure.com/api/v1/namespaces/kube-system/services/kubernetes-dashboard/proxy
+    tiller-deploy is running at https://k8scluster.southcentralus.cloudapp.azure.com/api/v1/namespaces/kube-system/services/tiller-deploy/prox
+    ```
+
+    ```bash
     kubectl get nodes
+
+    NAME                    STATUS    AGE       VERSION
+    k8s-agent-25202797-0    Ready     44s       v1.7.5
+    k8s-master-25202797-0   Ready     52s       v1.7.5
     ```
