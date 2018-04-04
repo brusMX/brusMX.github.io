@@ -77,17 +77,25 @@ Optional, a KeyVault to store Service Principals and RBAC support with AAD.
     ```bash
     az group create --name $RG_NAME --location $LOC
     ```
-    If you are getting weird errors about the RG_NAME on windows, just install dos2unix `apt-get install dos2unix` and convert the special chars with `dos2unix .env`.
+    If you are getting weird errors about the RG_NAME on windows, just install dos2unix `apt-get install dos2unix` and convert the special chars with 
+
+    ```bash
+    dos2unix .env
+    ```
 
 1. You need an SSH Key without a passphrase, you are able to see if you have one already with the following command: `cat $HOME/.ssh/id_rsa.pub`. If you don't have one, you can easily create one ssh key by runnin the following command:
 
-    **NOTE: This command will ask you to override a previous SSH key (If you already had one), in this case is better to create one with a custom name right next to it, just change the name when asked**
+    **NOTE: This command will ask you to override a previous SSH key, in this case is better to create one with a custom name right next to it. Just provide a new name when prompted**
 
     ```bash
     ssh-keygen -t rsa -b 4096 -N ""
     ```
 
-    You can cat it again and make sure it is there with this command: `cat $HOME/.ssh/id_rsa.pub`.
+    You can now obtain it with this command:
+
+    ```bash
+    cat $HOME/.ssh/id_rsa.pub
+    ```
 
 1. Create the json file that will be used to deploy the cluster. If you have all the right environment variables set up, you can copy paste the following command on your bash terminal and press `enter`. This will auto populate the file with your variables:
 
@@ -141,10 +149,9 @@ Optional, a KeyVault to store Service Principals and RBAC support with AAD.
             }
         }
     }
-    EOT
     ```
 
-    Press `Enter` on your keyboard to continue.
+    Finally type in CAPS `EOT` and press `Enter` on your keyboard to close and save the file.
 
 1. Cat the file `cat hybrid-cluster.json` and make sure that the variables **dnsPrefix**, **adminUsername**, **keyData**, **clientId** and **secret** were populated. If not, you can edit `.env` and re-run the command above and it will replace the `hybrid-cluster.json` file with the new variables. Alternatively, you can open the file with VSCode and edit it with the right info: `code hybrid-cluster.json`.
 
