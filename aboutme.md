@@ -55,15 +55,24 @@ Well, I was the architect for this project and I designed all the services to li
 
 <br/>
 
+#### Microsoft Corporation
+**Senior Software Developer Engineer**
+<br/>*July 2016 to date*
+<br/>Responsibilities:
+
+- *Multi Partner Hackfest Engagements* Coding elbow to elbow with our strategic partners to migrate their solutions to Azure. Topics: Kubernetes, docker containers, ADS, DevOps practices, Bash scripting, Batch AI, Distributed Systems.
+- Creating Workshops, conferences and hackathons for our Dev communities and, IT Camps for our IT Pro communities.
+- Evangelizing and engaging with No-MSFT communities and meet ups (Azure and DevTools adoption).
+<br/>[Company's Website](https://www.microsoft.com/)
+<hr/>
+
 #### Microsoft México
 **Senior Technical Evangelist** 
-<br/>*September 2015 to date* 
+<br/>*September 2015 to July 2016* 
 <br/>Responsibilities:
 
 - Trusted advisor to ISV partners (Office 365 integration, Windows 10 app development, Azure workload migration)
 - Executing Architecture Design Sessions (ADS) and Proofs of Concept (POC) 
-- Workshops, conferences and hackathons for our Dev communities and, IT Camps for our IT Pro communities.
-- Evangelizing and engaging with No-MSFT communities and meet ups (Azure and DevTools adoption)
 - Video production for [CH9](https://channel9.msdn.com/Niners/BrunoMedina) and MVA.
 <br/>[Company's Website](https://www.microsoft.com/es-mx/)
 <hr/>
