@@ -4,8 +4,10 @@
 # baseurl is the website's URL without the hostname
 
 # If you are building a simple GitHub user page (username.github.io) then use these settings:
-url: "https://brus.mx"
-baseurl: "brus.mx"
+# url: "http://username.github.io"
+# baseurl: ""
+url: "http://brus.mx"
+baseurl: "" #This goes empty if it's not a route on the domain
 
 # If you are building a GitHub project page then use these settings:
 #url: "http://username.github.io/projectname"
@@ -18,9 +20,8 @@ title: "Bruno Medina's Blog"
 
 # Short description of your site
 description: > 
-    Bruno Medina works as a Senior Technical Evangelist for Microsoft.
-    Bruno Medina is also the creator of Geek Pride, a popular Channel 9 Video Blog. 
-    Here you will find posts about: technology, software 
+    Bruno Medina works as a Senior Developer Engineer for Microsoft.
+    Here you will find posts about: kubernetes, technology, software 
     development, web, Open Source, Azure and some other random cool stuff.
 
 # --- Navigation bar options --- #
