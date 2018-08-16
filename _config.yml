@@ -52,8 +52,8 @@ author:
 # Select which links to show in the footer
 footer-links-active:
   rss: true
-  facebook: true
-  email: true
+  facebook: false
+  email: false
   twitter: true
   github: true
   linkedin: true
@@ -74,7 +74,7 @@ url-pretty: "brus.mx"  # eg. "deanattali.com/beautiful-jekyll"
 # --- Don't need to touch anything below here (but you can if you want) --- #
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Mexico_City"
+timezone: "America/Los_Angeles"
 markdown: redcarpet
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
